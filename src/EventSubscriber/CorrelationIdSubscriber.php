@@ -30,7 +30,7 @@ class CorrelationIdSubscriber
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->validator = new GenericValidator();
+        $this->validator    = new GenericValidator();
     }
 
     /**

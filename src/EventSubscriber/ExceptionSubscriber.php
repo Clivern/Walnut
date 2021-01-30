@@ -55,8 +55,6 @@ class ExceptionSubscriber implements EventSubscriberInterface
      * Handle Unexpected Exception.
      *
      * @param Exception $e
-     *
-     * @return void
      */
     private function handleUnexpectedError(ExceptionEvent $event, $e)
     {
@@ -68,7 +66,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
         ));
 
         $event->setResponse(new JsonResponse([
-            'errorMessage' => $e->getMessage(),
+            'errorMessage'  => $e->getMessage(),
             'correlationId' => $event->getRequest()->headers->get('X-Correlation-ID', ''),
         ], Response::HTTP_INTERNAL_SERVER_ERROR));
     }

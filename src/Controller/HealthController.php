@@ -60,7 +60,7 @@ class HealthController extends AbstractController
     public function index(): Response
     {
         $event = Event::fromArray([
-            'type' => 'healthCheck',
+            'type'    => 'healthCheck',
             'payload' => ['key' => 'value'],
         ]);
 

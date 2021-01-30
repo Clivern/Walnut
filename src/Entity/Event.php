@@ -61,7 +61,7 @@ class Event
      */
     public function __construct()
     {
-        $this->uuid = (string) Uuid::uuid4();
+        $this->uuid      = (string) Uuid::uuid4();
         $this->createdAt = new DateTime('NOW', new DateTimeZone('UTC'));
     }
 
@@ -153,7 +153,7 @@ class Event
     public static function fromArray(array $data): self
     {
         $data['createdAt'] = (isset($data['createdAt'])) ?: new DateTime('NOW', new DateTimeZone('UTC'));
-        $data['uuid'] = (isset($data['uuid'])) ?: (string) Uuid::uuid4();
+        $data['uuid']      = (isset($data['uuid'])) ?: (string) Uuid::uuid4();
 
         return (new self())
             ->setType($data['type'])

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Clivern/Walnut project.
  * (c) Clivern <hello@clivern.com>
@@ -19,7 +21,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 class StreamCommand extends Command
 {
-    protected static $defaultName = 'stream';
+    protected static $defaultName        = 'stream';
     protected static $defaultDescription = 'Listens to Incoming Messages';
 
     /**
@@ -30,8 +32,7 @@ class StreamCommand extends Command
         $this
             ->setDescription(self::$defaultDescription)
             ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-        ;
+            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description');
     }
 
     /**
@@ -39,7 +40,7 @@ class StreamCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+        $io   = new SymfonyStyle($input, $output);
         $arg1 = $input->getArgument('arg1');
 
         if ($arg1) {
