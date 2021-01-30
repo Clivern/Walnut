@@ -7,7 +7,7 @@ info:
 paths:
   /:
     get:
-      operationId: 'App\Controller\HealthController::index'
+      operationId: getHealth
       responses:
         '200':
           description: 'Application is up'

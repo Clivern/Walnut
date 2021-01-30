@@ -49,6 +49,7 @@ class HealthController extends AbstractController
      *
      * @OA\Get(
      *     path="/",
+     *     operationId="getHealth",
      *     @OA\Response(
      *       response="200",
      *       description="Application is up",
