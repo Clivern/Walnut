@@ -75,6 +75,11 @@ php-cs:
 	./vendor/bin/php-cs-fixer fix --diff --dry-run -v
 
 
+analyse:
+	@echo "\n==> Run phpstan analyse:"
+	vendor/bin/phpstan analyse src --memory-limit=-1
+
+
 ## coverage: Get Coverage Report
 coverage: cc composer
 	@echo "\n==> Get Coverage Report:"
@@ -89,7 +94,7 @@ fix:
 
 
 ## ci: Run CI Checks
-ci: config clear composer lint test
+ci: config clear composer lint test analyse
 	@echo "All quality checks passed"
 
 
