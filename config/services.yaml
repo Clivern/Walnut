@@ -27,5 +27,19 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
+    App\Factory\EventHandler:
+        factory: ['App\Factory\EventHandlerFactory', 'createEventHandler']
+
+    App\Factory\Mapper:
+        factory: ['App\Factory\EventMapperFactory', 'createEventMapper']
+
+    Clivern\Chunk\Core\Sender:
+        factory: ['App\Factory\SenderFactory', 'createSender']
+        arguments: ['@App\Factory\EventHandler']
+
+    Clivern\Chunk\Core\Listener:
+        factory: ['App\Factory\ListenerFactory', 'createListener']
+        arguments: ['@App\Factory\EventHandler', '@App\Factory\Mapper']
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

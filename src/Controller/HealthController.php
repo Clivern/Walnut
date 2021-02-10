@@ -11,7 +11,10 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Repository\EventRepository;
+use Clivern\Chunk\Core\Message;
+use Clivern\Chunk\Core\Sender;
 use OpenApi\Annotations as OA;
+use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +27,8 @@ class HealthController extends AbstractController
     /** @var EventRepository */
     private $eventRepository;
 
+    private $sender;
+
     /**
      * @OA\Info(
      *   title="Walnut API",
@@ -34,9 +39,11 @@ class HealthController extends AbstractController
      * )
      */
     public function __construct(
-        EventRepository $eventRepository
+        EventRepository $eventRepository,
+        Sender $sender
     ) {
         $this->eventRepository = $eventRepository;
+        $this->sender          = $sender;
     }
 
     /**
@@ -60,6 +67,16 @@ class HealthController extends AbstractController
      */
     public function index(): Response
     {
+        $this->sender->connect();
+
+        $message = new Message();
+        $message->setId(Uuid::uuid4()->toString())
+            ->setPayload('something')
+            ->setHandlerType('serviceA.processOrder');
+
+        $this->sender->send($message);
+        $this->sender->disconnect();
+
         $event = Event::fromArray([
             'type'    => 'healthCheck',
             'payload' => ['key' => 'value'],

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use Clivern\Chunk\Core\Listener;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,13 +24,23 @@ class StreamCommand extends Command
 {
     protected static $defaultName        = 'stream';
     protected static $defaultDescription = 'Listens to Incoming Messages';
+    private $listener;
+
+    /**
+     * Class constructor.
+     */
+    public function __construct(Listener $listener)
+    {
+        parent::__construct();
+        $this->listener = $listener;
+    }
 
     /**
      * Configure command.
      */
     protected function configure()
     {
-        $this
+        return $this
             ->setDescription(self::$defaultDescription)
             ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
             ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description');
@@ -50,6 +61,10 @@ class StreamCommand extends Command
         if ($input->getOption('option1')) {
             // ...
         }
+
+        $this->listener->connect();
+        $this->listener->listen();
+        $this->listener->disconnect();
 
         $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 

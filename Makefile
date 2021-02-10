@@ -98,9 +98,9 @@ ci: config clear composer lint test analyse
 	@echo "All quality checks passed"
 
 
-## run: Run Events
+## run: Run Walnut
 run:
-	@echo "\n==> Run Events:"
+	@echo "\n==> Run Walnut:"
 	$(SYMFONY) serve
 
 
