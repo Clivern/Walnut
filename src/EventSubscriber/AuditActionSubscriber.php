@@ -9,14 +9,14 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Event\EventCreated;
+use App\Event\AuditAction;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * EventCreatedSubscriber Class.
+ * AuditActionSubscriber Class.
  */
-class EventCreatedSubscriber implements EventSubscriberInterface
+class AuditActionSubscriber implements EventSubscriberInterface
 {
     /** @var LoggerInterface */
     private $logger;
@@ -33,13 +33,13 @@ class EventCreatedSubscriber implements EventSubscriberInterface
     /**
      * Event Created Handler.
      */
-    public function onEventCreated(EventCreated $event)
+    public function onAuditAction(AuditAction $action)
     {
         $this->logger->info(sprintf(
             'Event with type %s created with ID %d, UUID %s',
-            $event->getEvent()->getType(),
-            $event->getEvent()->getId(),
-            $event->getEvent()->getUUID()
+            $action->getEvent()->getType(),
+            $action->getEvent()->getId(),
+            $action->getEvent()->getUUID()
         ));
     }
 
@@ -51,7 +51,7 @@ class EventCreatedSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            EventCreated::NAME => 'onEventCreated',
+            AuditAction::NAME => 'onAuditAction',
         ];
     }
 }

@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Event\AuditAction;
 use App\Repository\EventRepository;
 use Clivern\Chunk\Core\Message;
 use Clivern\Chunk\Core\Sender;
@@ -81,7 +82,14 @@ class HealthController extends AbstractController
             'type'    => 'healthCheck',
             'payload' => ['key' => 'value'],
         ]);
+        $this->eventRepository->storeOne($event);
 
+        $event = Event::fromArray([
+            'type'    => 'newRequest',
+            'payload' => ['key' => 'value'],
+        ]);
+
+        $this->eventRepository->dispatchEvent(new AuditAction($event), AuditAction::NAME);
         $this->eventRepository->storeOne($event);
 
         return $this->json([

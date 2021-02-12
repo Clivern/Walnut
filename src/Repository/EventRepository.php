@@ -42,9 +42,16 @@ class EventRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($event);
         $this->getEntityManager()->flush();
 
-        $eventCreated = new EventCreated($event);
-        $this->eventDispatcher->dispatch($eventCreated, EventCreated::NAME);
+        $this->dispatchEvent(new EventCreated($event), EventCreated::NAME);
 
         return $event;
+    }
+
+    /**
+     * Dispatch Event.
+     */
+    public function dispatchEvent(object $event, string $name)
+    {
+        $this->eventDispatcher->dispatch($event, $name);
     }
 }
