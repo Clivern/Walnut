@@ -48,7 +48,7 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
-     * Dispatch Event.
+     * Dispatch an Event.
      */
     public function dispatchEvent(object $event, string $name)
     {
