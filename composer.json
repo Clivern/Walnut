@@ -21,7 +21,7 @@
         "doctrine/orm": "^2.8",
         "eventsauce/eventsauce": "^0.8.2",
         "justinrainbow/json-schema": "^5.2",
-        "ramsey/uuid": "^4.1",
+        "ramsey/uuid": "4.3.1",
         "symfony/console": "5.2.*",
         "symfony/dotenv": "5.2.*",
         "symfony/event-dispatcher": "5.2.*",
