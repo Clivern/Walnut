@@ -18,7 +18,7 @@
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.1",
-        "doctrine/orm": "^2.8",
+        "doctrine/orm": "2.12.3",
         "eventsauce/eventsauce": "^0.8.2",
         "justinrainbow/json-schema": "^5.2",
         "ramsey/uuid": "^4.1",
